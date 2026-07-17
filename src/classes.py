@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import Optional
 
 @dataclass
 class Tarefa:
@@ -14,4 +15,4 @@ class OS:
     tarefas: list[Tarefa]
     condicao: str
     prioridade: str
-    pred: str
+    pred: Optional[str]     # pode ter valores nulos
