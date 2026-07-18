@@ -1,9 +1,9 @@
 import pandas as pd
 from classes import Tarefa, OS
 
-# Lê cada aba do arquivo Excel como um dataframe
 def load_data(excel_path):
-    os_df = pd.read_excel(excel_path, sheet_name='OS').replace({float('nan'): None}) # tratar colunas vazias
+    # Lê cada aba do arquivo Excel como um dataframe
+    os_df = pd.read_excel(excel_path, sheet_name='OS')
     tarefas_df = pd.read_excel(excel_path, sheet_name='Tarefas')
     recursos_df = pd.read_excel(excel_path, sheet_name='Recursos')
     paradas_df = pd.read_excel(excel_path, sheet_name='Paradas')
@@ -35,10 +35,14 @@ def load_data(excel_path):
             tarefas=tarefas_os_dict.get(linha['OS'], []),
             condicao=linha['Condição'],
             prioridade=linha['Prioridade'],
-            pred=linha['Predecessora']
+            pred=None if pd.isna(linha['Predecessora']) else linha['Predecessora']    # trata valores nulos na coluna 'Predecessora' no momento da criação do objeto 
         )
 
         os_list.append(os_obj)
+
+    
+    # Cria dicionário de OS para facilitar acesso indexado O(1)
+    os_dict = {os.id: os for os in os_list}
 
     # Organiza recursos (horas de habilidade por dia da semana) em um dicionário de dicionários
     # com a chave sendo o dia da semana, para facilitar acesso de horas da habilidade no dia 
@@ -58,4 +62,4 @@ def load_data(excel_path):
     # Usa set para organizar paradas por questão de simplicidade de uso
     paradas_set = set(paradas_df['Dia'])
 
-    return os_list, recursos_dict, paradas_set
+    return os_list, os_dict, recursos_dict, paradas_set
