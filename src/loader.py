@@ -17,8 +17,7 @@ def load_data(excel_path):
                 nome=tarefa['Tarefa'],
                 habilidade=tarefa['Habilidade'],
                 duracao=tarefa['Duração'],
-                qtd=tarefa['Quantidade'],
-                horas=tarefa['Duração']*tarefa['Quantidade']
+                qtd=tarefa['Quantidade']
             )
 
             for _, tarefa in grupo.iterrows()

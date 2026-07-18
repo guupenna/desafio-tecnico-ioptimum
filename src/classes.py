@@ -7,7 +7,12 @@ class Tarefa:
     habilidade: str
     duracao: int
     qtd: int
-    horas: int  # adiciona atributo de total de horas da habilidade na tarefa
+
+    # calcula atributo de total de horas da habilidade na tarefa
+    @property
+    def horas(self) -> int:
+        return self.duracao * self.qtd
+
 
 @dataclass
 class OS:
@@ -16,3 +21,8 @@ class OS:
     condicao: str
     prioridade: str
     pred: Optional[str]     # pode ter valores nulos
+
+    # calcula atributo de total de horas de habilidade de todas tarefas da OS
+    @property
+    def horas_total(self) -> int:
+        return sum(t.horas for t in self.tarefas)
