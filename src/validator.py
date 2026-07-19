@@ -50,7 +50,7 @@ def validate_solution(
             continue
 
         if dia_inicio not in range(1, 6):
-            erros.append(f"Dia {dia_inicio} não permitido")
+            erros.append(f"Dia {dia_inicio} na OS {os_id} não permitido")
             continue
 
         os = os_dict.get(os_id)
@@ -69,7 +69,7 @@ def validate_solution(
 
         if os.pred is not None:
             if os.pred not in solucao:
-                erros.append(f"predecessora de {os_id} não está alocada")
+                erros.append(f"predecessora de {os_id} não está programada")
             else:
                 ocupacao_os_pred = _ocupacao_os(os_dict[os.pred], solucao[os.pred])
 
