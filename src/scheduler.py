@@ -75,14 +75,10 @@ def verifica_parada(
 
 
 
-def monta_schedule(
+def build_schedule(
         os_list: list[OS],
         recursos_dict: dict[int, dict[str, int]], paradas_set: set[int]
-) -> tuple[
-        dict[str, int],
-        dict[str, int],
-        dict[int, dict[str, int]]
-    ]:
+) -> tuple[dict[str, int], dict[str, int], dict[int, dict[str, int]]]:
     """
     Obtem solução inicial de disposição de dias de início para cada OS
 
@@ -92,11 +88,7 @@ def monta_schedule(
     paradas_set (set[int]): dias de parada
 
     Returns:
-    tuple[
-        dict[str, int],
-        dict[str, int],
-        dict[int, dict[str, int]]
-    ]: dias de início para cada OS, dia de fim para cada OS e capacidade restante de cada hora de habilidade dada a alocação de dias
+    tuple[dict[str, int], dict[str, int], dict[int, dict[str, int]]]: dias de início para cada OS, dia de fim para cada OS e capacidade restante de cada hora de habilidade dada a alocação de dias
     """
 
     # copia dicionario de recursos usando deepcopy para garantir que o dicionario interno tambem seja copiado
