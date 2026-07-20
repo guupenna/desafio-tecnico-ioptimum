@@ -60,7 +60,8 @@ desafio-tecnico-ioptimum/
 │       ├── os_por_prioridade.png
 │       └── ocupacao_semana.png
 ├── docs/
-│   └── RELATORIO.md
+│   ├── RELATORIO.md
+│   └── RELATORIO.pdf
 ├── .gitignore
 ├── LICENSE
 ├── requirements.txt
@@ -95,4 +96,4 @@ dia e a semana tem 5 dias, elas não caberiam na semana nessa configuração.
 Portanto, programar poucas OS é um resultado esperado.
 
 
-Mais informações sobre as decisões para a solução do desafio em [docs/RELATORIO.md](docs/RELATORIO.md).
+Mais informações sobre as decisões para a solução do desafio em [docs/RELATORIO.md](docs/RELATORIO.md), tambem disponível em [PDF](docs/RELATORIO.pdf).

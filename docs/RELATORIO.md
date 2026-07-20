@@ -4,8 +4,7 @@ Desafio de programação semanal de manutenção para vaga de estágio no iOptim
 
 ## 1. O problema
 
-O desafio pede uma programação semanal de manutenção, que consiste em decidir quais ordens de serviço serão executadas em cada um dos cinco dias da semana. A programação precisa respeitar as horas disponíveis de cada habilidade em cada dia, os dias em que a planta
-está parada e a ordem entre OS que dependem umas das outras. O objetivo é executar o maior número possível de OS, dando preferência às mais críticas (ordem Z > A > B > C) e utilizar ao máximo os recursos.
+O desafio pede uma programação semanal de manutenção, que consiste em decidir quais ordens de serviço serão executadas em cada um dos cinco dias da semana. A programação precisa respeitar as horas disponíveis de cada habilidade em cada dia, os dias em que a planta está parada e a ordem entre OS que dependem umas das outras. O objetivo é executar o maior número possível de OS, dando preferência às mais críticas (ordem Z > A > B > C) e utilizar ao máximo os recursos.
 
 ## 2. Análise dos dados
 
