@@ -79,6 +79,12 @@ def create_solution(excel_path: str) -> dict:
 
                     'Uma OS sucessora só começa depois que a sua predecessora acaba, do dia seguinte em '
                     'diante. Além disso, se a predecessora não entrou, a sucessora fica de fora junto.',
+
+                    'Uma OS só conta como programada se terminar dentro da semana (a '
+                    'especificação não diz isso de forma explícita, mas o objetivo é '
+                    'maximizar a quantidade de OS executadas, e uma OS que passasse do '
+                    'quinto dia não teria sido executada naquela semana).',
+
                 ],
                 'validacao': (
                     f'Quantidade de erros: {len(erros)}. A verificação é feita por um validador independente '

@@ -166,7 +166,7 @@ def _plot_prioridades(
         label='Programadas'
     )
     ax.bar_label(barras, fmt='%d', padding=3)
-    ax.legend(frameon=False, loc='upper left')
+    ax.legend(frameon=False)
     ax.grid(axis='x', color=GRADE, linewidth=0.8)
     ax.set_axisbelow(True)
     ax.invert_yaxis()
@@ -218,7 +218,7 @@ def _plot_ocupacao(
         color=REF,
         linewidth=2
     )
-    ax.legend(frameon=False)
+    ax.legend(frameon=False, loc='upper left')
     ax.set_ylim(0, 160)
     ax.grid(axis='y', color=GRADE, linewidth=0.8)
     ax.set_axisbelow(True)
