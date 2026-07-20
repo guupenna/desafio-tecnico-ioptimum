@@ -223,7 +223,7 @@ def _plot_ocupacao(
     ax.grid(axis='y', color=GRADE, linewidth=0.8)
     ax.set_axisbelow(True)
     ax.set_xticks(dias)
-    ax.set_title('Horas alocadas por dia')
+    ax.set_title('Horas usadas por dia')
     ax.set_xlabel('Dia da semana')
     ax.set_ylabel('Horas')
 

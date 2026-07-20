@@ -95,6 +95,8 @@ def create_solution(excel_path: str) -> dict:
 
 
 if __name__ == '__main__':
+    # roda o backlog de 500 que é o usado nos gráficos e do exemplo detalhado no relatório
+    # a comparação entre os três está em scripts/resultado.py
     diretorio_atual = Path(__file__).resolve().parent.parent
     excel_path = diretorio_atual / 'data' / 'backlog_desafio_500.xlsx'
     output_solution = create_solution(excel_path)
