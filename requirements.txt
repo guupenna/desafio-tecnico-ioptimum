@@ -1,2 +1,3 @@
 pandas
 openpyxl
+matplotlib==3.11.1
