@@ -1,3 +1,9 @@
+"""
+Testes do validador, executados a partir de uma solução modificada
+
+Para provar que o validador realmente funciona, cada teste parte da solução válida gerada pelo scheduler, modifica para quebrar uma restrição de propósito e afirma que a violação correspondente apareceu
+"""
+
 import sys
 from pathlib import Path
 
@@ -10,8 +16,9 @@ from validator import validate_solution
 
 def _cenario_valido():
     """
-    Carrega os dados, gera solução base e retorna valores para serem usados no validate_solution()
+    Carrega os dados e gera solução base para todos os testes
     """
+
     diretorio_atual = Path(__file__).resolve().parent.parent
     excel_path = diretorio_atual / 'data' / 'backlog_desafio_500.xlsx'
 
@@ -151,6 +158,7 @@ def test_os_passa_limite_da_semana():
 
 
 if __name__ == '__main__':
+    # varre todo o módulo procurando as funções test_* e executa cada uma
     for nome, f in list(globals().items()):
         if nome.startswith('test_'):
             f()

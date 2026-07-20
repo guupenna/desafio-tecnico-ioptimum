@@ -1,3 +1,9 @@
+"""
+Validação independente da solução gerada pelo scheduler
+
+O validador não usa as funções de scheduler.py pois um erro dentro delas passaria despercebido no validador, por isso a ocupação de cada OS é calculada novamente mas de outro jeito. Nesse caso, em vez do loop que vai preenchendo 8h por dia, as tarefas viram uma lista em que cada item representa a execução em 1 hora e o dia é extraído dividindo o índice da tarefa por 8 (8h em um dia).
+"""
+
 from classes import OS
 
 def _ocupacao_os(
@@ -5,10 +11,9 @@ def _ocupacao_os(
         dia_inicio: int
 ) -> dict[tuple[int, str], int]:
     """
-    Funçao helper usado para construir abordagem diferente para verificar disposição de tarefas de uma OS
+    Calcula novamente quantas horas de cada habilidade a OS usa em um dia, mas de outra forma
     """
     
-    # inicializa dicionario que acumula as horas consumidas em cada dia para cada habilidade da OS
     ocupacao_os = {}
 
     # inicializa lista de ocupação de habilidades, dispostas como uma inserçao do nome da habilidade para cada hora, em ordem.
@@ -36,7 +41,16 @@ def validate_solution(
         paradas_set: set[int]
 ) -> list[str]:
     """
-    Verifica se uma solução cumpre as restrições do problema utilizando uma modelagem diferente da construção da solução Retorna uma lista com os problemas encontrados (lista vazia = soluçao valida)
+    Verifica se uma solução respeita todas as restrições do problema
+
+    Args:
+    solucao: OS programads e seu dia de início
+    os_dict: dicionário de OS com o id da OS como chave
+    recursos_dict: horas disponíveis de cada habilidade em cada dia
+    paradas_set: dias de parada
+
+    Returns:
+    Uma descrição por erro encontrado (não cumprimento da restrição), em que a lista vazia significa solução válida
     """    
 
     erros = []

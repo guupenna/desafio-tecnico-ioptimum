@@ -1,5 +1,8 @@
-from classes import OS
+"""
+Cálculo da métricas de resultado exigidas na especificação do desafio
+"""
 
+from classes import OS
 
 def calculate_metrics(
         solucao: dict[str, int],
@@ -8,34 +11,42 @@ def calculate_metrics(
         capacidade_restante: dict[int, dict[str, int]]
 ) -> dict:
     """
-    Calcula metricas e preenche dicionario com os valores (n_os, n_Z, n_A, n_B, n_C e utilization)
-    """
+    Calcula métricas de resultado da programação
 
-    metrics = {}
+    Args:
+    solucao: OS programads e seu dia de início
+    os_dict: dicionário de OS com o id da OS como chave
+    recursos_dict: horas disponíveis de cada habilidade em cada dia
+    capacidade_restante: o que sobrou das horas depois da programação das OS
+
+    Returns:
+    O dicionário metrics da saída pedida na especificação, com número total de OS programadas, número de OS programadas para cada prioridade e percentual de utilização de cada habilidade (e todos os valores como string)
+    """
 
     n_os = len(solucao)
 
+    # inicializa as quatro chaves para que uma prioridade sem nenhuma OS programada seja 0 em vez de não aparecer
     cont = {'Z': 0, 'A': 0, 'B': 0, 'C': 0}
 
     for os_id in solucao.keys():
         prioridade_os = os_dict[os_id].prioridade
         cont[prioridade_os] += 1
 
-    # registra no dicionario a soma de horas de cada habilidade, salvas em recursos
+    # soma as horas disponíveis de cada habilidade por todos os dias da semana
     total = {}
 
     for dia in recursos_dict:
         for habilidade in recursos_dict[dia]:
             total[habilidade] = total.get(habilidade, 0) + recursos_dict[dia][habilidade]
 
-    # registra no dicionario a soma de horas restante de cada habilidade, salvas em capacidade_restante
+    # tambem a mesma soma, mas agora com o que sobrou
     restante = {}
 
     for dia in capacidade_restante:
         for habilidade in capacidade_restante[dia]:
             restante[habilidade] = restante.get(habilidade, 0) + capacidade_restante[dia][habilidade]
 
-    # cria e preenche dicionario utilizacao com a porcentagem calculada
+    # o que foi usado é total - restante
     utilizacao = {}
 
     for habilidade in total:

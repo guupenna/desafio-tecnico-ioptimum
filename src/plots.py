@@ -1,9 +1,15 @@
+"""
+Geração dos gráficos de resultado
+"""
+
 import matplotlib
-matplotlib.use('Agg')
+matplotlib.use('Agg')   # gravar direto em arquivo sem necessidade de GUI
 import matplotlib.pyplot as plt
+
 from pathlib import Path
+from classes import OS
 
-
+# padroniza cores para que cada habilidade seja uma cor, em ordem
 CORES = {
     'Mecânico': "#a55a0e",
     'Elétrico': "#c9a20b",
@@ -16,9 +22,12 @@ REF = '#6b6b6b'
 DESTACAR = '#37474f'
 
 
-def _horas_usadas(recursos_dict, capacidade_restante):
+def _horas_usadas(
+        recursos_dict: dict[int, dict[str, int]],
+        capacidade_restante: dict[int, dict[str, int]]
+) -> dict[tuple[int, str], int]:
     """
-    Função helper para facilitar acesso a horas usadas para cada habilidade em cada dia
+    Horas usadas para cada habilidade em cada dia (horas disponíveis - horas que sobraram)
     """
 
     horas_usadas = {}
@@ -30,10 +39,27 @@ def _horas_usadas(recursos_dict, capacidade_restante):
     return horas_usadas
 
 
-def gera_plots(solucao, os_dict, recursos_dict, capacidade_restante, caminho='outputs/figs') -> list[str]:
+def gera_plots(
+        solucao: dict[str, int],
+        os_dict: dict[str, OS],
+        recursos_dict: dict[int, dict[str, int]],
+        capacidade_restante: dict[int, dict[str, int]],
+        caminho: str | Path = 'outputs/figs'
+) -> list[str]:
     """
-    Gera e salva todos plots necessários, retornando os caminhos
+    Gera e salva todos plots
+
+    Args:
+    solucao: OS programads e seu dia de início
+    os_dict: dicionário de OS com o id da OS como chave
+    recursos_dict: horas disponíveis de cada habilidade em cada dia
+    capacidade_restante: o que sobrou das horas depois da programação das OS
+    caminho: pasta onde as figs serão salvas
+
+    Returns:
+    Os caminhos dos arquivos salvos 
     """
+
     Path(caminho).mkdir(parents=True, exist_ok=True)
     usado = _horas_usadas(recursos_dict, capacidade_restante)
 
@@ -44,9 +70,12 @@ def gera_plots(solucao, os_dict, recursos_dict, capacidade_restante, caminho='ou
     return [destino_fig_1, destino_fig_2, destino_fig_3]
 
 
-def _plot_utilizacao(usado, recursos_dict, caminho) -> str:
+def _plot_utilizacao(
+        usado: dict[tuple[int, str], int],
+        recursos_dict: dict[int, dict[str, int]],
+        caminho: str) -> str:
     """
-    Plot de porcentagem de utilização por habilidade
+    Percentual de utilização de cada habilidade
     """
     usado_por_habilidade = {}
 
@@ -96,9 +125,13 @@ def _plot_utilizacao(usado, recursos_dict, caminho) -> str:
     return str(destino)
 
 
-def _plot_prioridades(solucao, os_dict, caminho) -> str:
+def _plot_prioridades(
+        solucao: dict[str, int],
+        os_dict: dict[str, OS],
+        caminho: str
+) -> str:
     """
-    Plot de OS programadas por prioridade sobre total
+    Por prioridade, quantidade de OS programadas contra o total
     """
     programadas = {'Z': 0, 'A': 0, 'B': 0, 'C': 0}
 
@@ -147,9 +180,13 @@ def _plot_prioridades(solucao, os_dict, caminho) -> str:
     return str(destino)
 
 
-def _plot_ocupacao(usado, recursos_dict, caminho) -> str:
+def _plot_ocupacao(
+        usado: dict[tuple[int, str], int],
+        recursos_dict: dict[int, dict[str, int]],
+        caminho: str
+) -> str:
     """
-    Plot de horas ocupadas na semana por habilidade em cada dia
+    Horas ocupadas por dia organizadas por habilidade e com a capacidade de cada dia
     """
     dias = sorted(recursos_dict)
 
